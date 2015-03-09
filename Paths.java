@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Paths{
 	static Map<String,List<String>> routes=new Hashtable<String,List<String>>();
+	Queue<String> pathQueue=new LinkedList<String>();
 	static{
 		List<String> bangalore=new ArrayList<String>();
 		bangalore.add("singapore");
@@ -27,17 +28,41 @@ public class Paths{
 		routes.put("dubai",dubai);
 	}
 
-	public static boolean isCityPresent(String city){
+	public  boolean isCityPresent(String city){
 		Set<String> cities=routes.keySet();
 		return cities.contains(city)?true:false;
 	}
 
-	public static boolean hasDirectPath(String fromCity, String toCity){
+	public boolean hasDirectPath(String fromCity, String toCity){
 		List<String> startCity=routes.get(fromCity);
 		return (startCity!=null)?startCity.contains(toCity):false;
 	}
 
-	public static void giveStatus(String fromCity, String toCity){
+	public void addInPathQueueIfDirectPath(String fromCity, String toCity){
+		if(routes.get(fromCity).contains(toCity)){
+            pathQueue.add(toCity);
+            return;
+        }
+	}
+
+	public void addCitiesInPathQueue(String fromCity, String toCity){		
+		if(fromCity==null || toCity==null){System.out.println("write man"); return;};
+		pathQueue.add(fromCity);
+		if(hasDirectPath(fromCity,toCity)){addInPathQueueIfDirectPath(fromCity, toCity);return;};
+        for(int i=0; i<routes.get(fromCity).size(); i++){
+            if(!pathQueue.contains(routes.get(fromCity).get(i))){
+                addCitiesInPathQueue(routes.get(fromCity).get(i),toCity);
+            	return;
+            }
+        }
+	}
+
+	public  void printPath(){
+		System.out.println(String.join("->",this.pathQueue));
+		return;
+	}
+
+	public  void giveStatus(String fromCity, String toCity){
 		if(!isCityPresent(fromCity)){ System.out.println("No city named "+fromCity+" in database");return;};
 		if(!isCityPresent(toCity)){ System.out.println("No city named "+toCity+" in database");return;}
 		System.out.println(hasDirectPath(fromCity,toCity));
@@ -46,6 +71,9 @@ public class Paths{
 	public static void main(String[] args) {
 		String fromCity=args[0].toLowerCase();
 		String toCity=args[1].toLowerCase();
-		giveStatus(fromCity,toCity);
+		Paths p =new Paths();
+		p.giveStatus(fromCity,toCity);
+		p.addCitiesInPathQueue(fromCity,toCity);
+		p.printPath();
 	}
 }
