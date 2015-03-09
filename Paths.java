@@ -36,4 +36,16 @@ public class Paths{
 		List<String> startCity=routes.get(fromCity);
 		return (startCity!=null)?startCity.contains(toCity):false;
 	}
+
+	public static void giveStatus(String fromCity, String toCity){
+		if(!isCityPresent(fromCity)){ System.out.println("No city named "+fromCity+" in database");return;};
+		if(!isCityPresent(toCity)){ System.out.println("No city named "+toCity+" in database");return;}
+		System.out.println(hasDirectPath(fromCity,toCity));
+	}
+
+	public static void main(String[] args) {
+		String fromCity=args[0].toLowerCase();
+		String toCity=args[1].toLowerCase();
+		giveStatus(fromCity,toCity);
+	}
 }
