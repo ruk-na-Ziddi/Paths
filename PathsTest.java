@@ -116,4 +116,10 @@ public class PathsTest {
         Paths path=new Paths();
         assertFalse(path.hasDirectPath("bakari","tiger"));
     }
+
+    @Test
+    public void test_hasDirectPath_gives_false_for_india_to_america(){
+        Paths path=new Paths();
+        assertFalse(path.hasDirectPath("india","america"));
+    }
 }
