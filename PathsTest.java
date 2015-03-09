@@ -9,4 +9,10 @@ public class PathsTest {
         assertTrue(path.isCityPresent("bangalore"));
     }
 
+    @Test
+    public void test_isCityPresent_gives_true_for_singapore(){
+        Paths path = new Paths();
+        assertTrue(path.isCityPresent("singapore"));
+    }
+
 }
