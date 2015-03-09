@@ -110,4 +110,10 @@ public class PathsTest {
         Paths path=new Paths();
         assertFalse(path.hasDirectPath("bangalore","rampur"));
     }
+
+    @Test
+    public void test_hasDirectPath_gives_false_for_bakari_to_tiger(){
+        Paths path=new Paths();
+        assertFalse(path.hasDirectPath("bakari","tiger"));
+    }
 }
