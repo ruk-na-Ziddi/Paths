@@ -62,4 +62,10 @@ public class PathsTest {
         Paths path=new Paths();
         assertTrue(path.hasDirectPath("bangalore","singapore"));
     }
+
+    @Test
+    public void test_hasDirectPath_gives_true_for_singapore_to_seoul(){
+        Paths path=new Paths();
+        assertTrue(path.hasDirectPath("singapore","seoul"));
+    }
 }
