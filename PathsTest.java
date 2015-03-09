@@ -26,4 +26,10 @@ public class PathsTest {
         Paths path = new Paths();
         assertTrue(path.isCityPresent("beijing"));
     }
+
+    @Test
+    public void test_isCityPresent_gives_true_for_seoul(){
+        Paths path = new Paths();
+        assertTrue(path.isCityPresent("seoul"));
+    }
 }
