@@ -98,4 +98,10 @@ public class PathsTest {
         Paths path=new Paths();
         assertFalse(path.hasDirectPath("dubai","mumbai"));
     }
+
+    @Test
+    public void test_hasDirectPath_gives_false_for_karanchi_to_islamabad(){
+        Paths path=new Paths();
+        assertFalse(path.hasDirectPath("karachi","islamabad"));
+    }
 }
