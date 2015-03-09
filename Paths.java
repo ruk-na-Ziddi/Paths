@@ -62,17 +62,17 @@ public class Paths{
 		return;
 	}
 
-	public  void giveStatus(String fromCity, String toCity){
-		if(!isCityPresent(fromCity)){ System.out.println("No city named "+fromCity+" in database");return;};
-		if(!isCityPresent(toCity)){ System.out.println("No city named "+toCity+" in database");return;}
-		System.out.println(hasDirectPath(fromCity,toCity));
+	public int giveStatus(String fromCity, String toCity){
+		if(!isCityPresent(fromCity)){ System.out.println("No city named "+fromCity+" in database");return 0;};
+		if(!isCityPresent(toCity)){ System.out.println("No city named "+toCity+" in database");return 0;}
+		System.out.println("direct_path="+hasDirectPath(fromCity,toCity));return 1;
 	}
 
 	public static void main(String[] args) {
 		String fromCity=args[0].toLowerCase();
 		String toCity=args[1].toLowerCase();
 		Paths p =new Paths();
-		p.giveStatus(fromCity,toCity);
+		if(p.giveStatus(fromCity,toCity)==0){return;}
 		p.addCitiesInPathQueue(fromCity,toCity);
 		p.printPath();
 	}
