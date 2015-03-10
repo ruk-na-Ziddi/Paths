@@ -1,3 +1,5 @@
+package com.paths;
+
 import java.util.*;
 
 public class Paths{
@@ -30,25 +32,24 @@ public class Paths{
 
 	public  boolean isCityPresent(String city){
 		Set<String> cities=routes.keySet();
-		return cities.contains(city)?true:false;
+		return cities.contains(city);
 	}
 
 	public boolean hasDirectPath(String fromCity, String toCity){
 		List<String> startCity=routes.get(fromCity);
-		return (startCity!=null)?startCity.contains(toCity):false;
+		return (startCity!=null) && startCity.contains(toCity);
 	}
 
 	public void addInPathQueueIfDirectPath(String fromCity, String toCity){
 		if(routes.get(fromCity).contains(toCity)){
             pathQueue.add(toCity);
-            return;
         }
 	}
 
 	public void addCitiesInPathQueue(String fromCity, String toCity){		
-		if(fromCity==null || toCity==null){System.out.println("write man"); return;};
+		if(fromCity==null || toCity==null){System.out.println("write man"); return;}
 		pathQueue.add(fromCity);
-		if(hasDirectPath(fromCity,toCity)){addInPathQueueIfDirectPath(fromCity, toCity);return;};
+		if(hasDirectPath(fromCity,toCity)){addInPathQueueIfDirectPath(fromCity, toCity);return;}
         for(int i=0; i<routes.get(fromCity).size(); i++){
             if(!pathQueue.contains(routes.get(fromCity).get(i))){
                 addCitiesInPathQueue(routes.get(fromCity).get(i),toCity);
@@ -59,11 +60,10 @@ public class Paths{
 
 	public  void printPath(){
 		System.out.println(String.join("->",this.pathQueue));
-		return;
 	}
 
 	public int giveStatus(String fromCity, String toCity){
-		if(!isCityPresent(fromCity)){ System.out.println("No city named "+fromCity+" in database");return 0;};
+		if(!isCityPresent(fromCity)){ System.out.println("No city named "+fromCity+" in database");return 0;}
 		if(!isCityPresent(toCity)){ System.out.println("No city named "+toCity+" in database");return 0;}
 		System.out.println("direct_path="+hasDirectPath(fromCity,toCity));return 1;
 	}
