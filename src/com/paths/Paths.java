@@ -1,6 +1,10 @@
 package com.paths;
 
+import java.io.IOException;
 import java.util.*;
+
+import static java.nio.file.Files.readAllBytes;
+import static java.nio.file.Paths.get;
 
 public class Paths{
 	static Map<String,List<String>> routes=new Hashtable<String,List<String>>();
@@ -67,6 +71,14 @@ public class Paths{
 		if(!isCityPresent(toCity)){ System.out.println("No city named "+toCity+" in database");return 0;}
 		System.out.println("direct_path="+hasDirectPath(fromCity,toCity));return 1;
 	}
+
+    public String getFileContent(String fileName) throws IOException {
+        return new String(readAllBytes(get(fileName)));
+    }
+
+    public String[] splitContentAtNewLine(String content){
+        return content.split("\n");
+    }
 
 	public static void main(String[] args) {
 		String fromCity=args[0].toLowerCase();
