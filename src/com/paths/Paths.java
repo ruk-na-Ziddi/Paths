@@ -72,20 +72,22 @@ public class Paths{
 		System.out.println("direct_path="+hasDirectPath(fromCity,toCity));return 1;
 	}
 
-    public String getFileContent(String fileName) throws IOException {
-        return new String(readAllBytes(get(fileName)));
-    }
 
-    public String[] splitContentAtNewLine(String content){
-        return content.split("\n");
-    }
 
-	public static void main(String[] args) {
-		String fromCity=args[0].toLowerCase();
-		String toCity=args[1].toLowerCase();
+	public static void main(String[] args) throws IOException {
+        String fromCity=args[0].toLowerCase();
+        String toCity=args[1].toLowerCase();
+        if(args[0].equals("-f")){
+            String filePath=args[1];
+            String content=ReadFileAndMap.getFileContent(filePath);
+            String[] sc = ReadFileAndMap.splitContentAtNewLine(content);
+            ReadFileAndMap.mapToRoute(sc);
+            fromCity=args[2].toLowerCase();
+            toCity=args[3].toLowerCase();
+        }
 		Paths p =new Paths();
-		if(p.giveStatus(fromCity,toCity)==0){return;}
-		p.addCitiesInPathQueue(fromCity,toCity);
+		if(p.giveStatus(fromCity, toCity)==0){return;}
+		p.addCitiesInPathQueue(fromCity, toCity);
 		p.printPath();
 	}
 }
