@@ -49,16 +49,11 @@ public class ReadFileAndMap {
         List<String> cont = Paths.routes.get(lineArray[0].toLowerCase());
         if (cont == null) {
             cont = new ArrayList<String>();
-            for (int i = 1; i < lineArray.length; ++i) {
-                cont.add(lineArray[i].toLowerCase());
-            }
+            cont.add(lineArray[1].toLowerCase());
             Paths.routes.put(lineArray[0].toLowerCase(), cont);
         } else {
-            for (int i = 1; i < lineArray.length; ++i) {
-                if (!cont.contains(lineArray[i].toLowerCase()))
-                    cont.add(lineArray[i].toLowerCase());
-            }
+            if (!cont.contains(lineArray[1].toLowerCase()))
+                cont.add(lineArray[1].toLowerCase());
         }
     }
 }
-
